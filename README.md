@@ -41,7 +41,7 @@ Here are a few very basic examples to get started:
 
 require_once "vendor/autoload.php";
 
-use Its404\PhpPuppeteer\Browser;
+use Eckinox\PhpPuppeteer\Browser;
 
 $config = [
 	"url" => "https://github.com/eckinox/php-puppeteer"
@@ -59,7 +59,7 @@ echo $content
 
 require_once "vendor/autoload.php";
 
-use Its404\PhpPuppeteer\Browser;
+use Eckinox\PhpPuppeteer\Browser;
 
 $config = [
 	"html" => "<h1>Hello World!</h1>"
