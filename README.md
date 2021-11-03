@@ -1,146 +1,91 @@
-PHP Puppeteer
-===========
-This project provides the ability to generate PDF with [Puppeteer](https://github.com/GoogleChrome/puppeteer) in PHP
+# PHP Puppeteer
+
+This project provides the ability to generate PDF with [Puppeteer](https://github.com/GoogleChrome/puppeteer) in PHP.
 
 - PHP 5 Compatible
 - No Dependent Package
 - Easy to Use
 
-# Dependencies
-The library is running based on [Nodejs](https://nodejs.org/en/)(7.6 above) and [Puppeteer](https://github.com/GoogleChrome/puppeteer)
-It is tested under NodeJS 8.
 
-Installation on CentOS 7:
+## Getting started
 
-```
-sudo curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
-sudo yum install -y nodejs pango.x86_64 libXcomposite.x86_64 libXcursor.x86_64 libXdamage.x86_64 libXext.x86_64 libXi.x86_64 libXtst.x86_64 cups-libs.x86_64 libXScrnSaver.x86_64 libXrandr.x86_64 GConf2.x86_64 alsa-lib.x86_64 atk.x86_64 gtk3.x86_64 ipa-gothic-fonts xorg-x11-fonts-100dpi xorg-x11-fonts-75dpi xorg-x11-utils xorg-x11-fonts-cyrillic xorg-x11-fonts-Type1 xorg-x11-fonts-misc
+### 1. Install Puppeteer
+To install Puppeteer and its dependencies, we recommend you take a look at [Puppeteer's official installation guide](https://developers.google.com/web/tools/puppeteer/get-started) as well as their [official troubleshooting guide](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md).
+
+Here is a snippet for Ubuntu (tested on 20.04) that works well at the time of writing:
+```bash
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt-get install -y nodejs gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget libappindicator3-1 libatk-bridge2.0-0 libgbm1
 sudo npm install --global --unsafe-perm puppeteer
 sudo chmod -R o+rx /usr/lib/node_modules/puppeteer/.local-chromium
 ```
 
-Installation on Ubuntu 16.04:
+### 2. Install the package through Composer
+Install this package using Composer:
 
-```
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt-get install -y nodejs gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
-sudo npm install --global --unsafe-perm puppeteer
-sudo chmod -R o+rx /usr/lib/node_modules/puppeteer/.local-chromium
+```bash
+composer require eckinox/php-puppeteer
 ```
 
-# Installation
-Install `its404/php-puppeteer` using Composer.
-~~~
-composer require its404/php-puppeteer
-~~~
-# Usage
-## Parameters
-The library has set some default parameter values to support basic features, you can set the customized parameters to override the default ones, it supports all parameters of [Puppeteer API](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md)
+### 3. Start generating PDFs!
+Check out the examples and the documentation below to learn how to use the library
 
-__Sample parameter array:__
+---
 
-~~~
-$config  = [
-    'html' => "<h1>Hello World</h1>",
-	'pdf' => [
-		'path' => '/tmp/test.pdf',
-		'margin' => [
-			'top' => '10mm',
-			'right' => '10mm',
-			'bottom' => '10mm',
-			'left' => '10mm',
-		]
-	]
-];
-~~~
+## Usage  examples
+Here are a few very basic examples to get started:
 
-> **Note:**
-> 1. If both `$config['pdf']['html']` and $config['pdf']['url'] are set, `html` will be picked up. 
-> 2. If `$config['pdf']['path']` is not set, will return pdf data
+### Generating PDFs from an URL
+```php
+<?php
 
-## Import
-You need to import this namespace at the top of your PHP class
+require_once "vendor/autoload.php";
 
-~~~
 use Its404\PhpPuppeteer\Browser;
-~~~
 
+$config = [
+	"url" => "https://github.com/eckinox/php-puppeteer"
+];
+$browser = new Browser();
+$content = $browser->pdf($config);
 
-__PDF by URL__
+header("Content-type:application/pdf");
+echo $content
+```
 
-You can generate PDF by URL through `pdf` function:
+### Generating PDFs from an HTML string
+```php
+<?php
 
-~~~
-public function actionTest1()
-{
-	$config = [
-		"url" => "https://www.highcharts.com/demo/line-basic",
-	];
-	$browser = new Browser();
-	$browser->isDebug = true;
-	$content = $browser->pdf($config);
-	
-	header("Content-type:application/pdf");
-	echo $content;
-}
-~~~
+require_once "vendor/autoload.php";
 
-You can set any parameter in `$config` to override the default values
+use Its404\PhpPuppeteer\Browser;
 
-__PDF by HTML__
+$config = [
+	"html" => "<h1>Hello World!</h1>"
+];
+$browser = new Browser();
+$content = $browser->pdf($config);
 
-You can generate PDF by html code through `pdf` function:
+header("Content-type:application/pdf");
+echo $content
+```
 
-~~~
-public function actionTest2()
-{
-	$config = [
-		"html" => "<h1>Hello Wolrd</h1>"
-	];
-	$browser = new Browser();
-	$content = $browser->pdf($config);
-	
-	header("Content-type:application/pdf");
-	echo $content;
-}
-~~~
-> **Debug** The class `Browser` has one parameter `$isDebug`, it would be debug mode if it's `true`, detailed error messages would be returned from `pdf` function if an error happened during Puppeteer running.
+---
 
-__PDF to specific path__
+## A few more tips...
 
-You can generate PDF to a specific path by setting `$config['pdf']['path']`
-
-~~~
-public function actionTest3()
-{
-	$config = [
-		"html" => "<h1>Hello Wolrd</h1>",
-		'pdf' => [
-			'path' => '/tmp/test.pdf',
-		]
-	];
-	$browser = new Browser();
-	$browser->isDebug = true;
-	$result = $browser->pdf($params);
-	
-	if (isset($result['returnVal'])&& $result['returnVal'] == 0) {
-		echo "PDF generated successfully";
-	} else {
-		echo "Failed to generate PDF";
-		var_dump($result['output']);
-	}
-}
-~~~
-
-__Start a new page on PDF__
-
+### Starting a new page
 You can add following html code in the html where you'd like to start a new page for PDF.
 
-~~~
+```html
 <div style="page-break-after:always;"></div>
-~~~
+```
 
-# More Examples?
+### Having trouble loading fonts?
+If you're having trouble loading fonts, check out [the font-loading example](examples).
 
-You can find more examples from [here](https://github.com/its404/php-puppeteer/tree/master/examples)
+---
 
+## Credits
+This package is a fork of [its404/php-puppeteer](https://github.com/its404/php-puppeteer), with updates to allow usage on more modern operating systems and versions of NodeJS, as well as improved documentation.

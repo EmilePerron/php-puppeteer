@@ -1,5 +1,5 @@
 {
-	"name" : "its404/php-puppeteer",
+	"name" : "eckinox/php-puppeteer",
 	"description" : "PHP Wrapper for Google Chrome Puppeteer",
 	"keywords" : [
 		"PHP",
@@ -7,11 +7,17 @@
 		"PDF",
 		"Screenshot"
 	],
-	"homepage" : "http://github.com/its404/php-puppeteer",
-	"authors" : [{
+	"homepage" : "http://github.com/eckinox/php-puppeteer",
+	"authors" : [
+		{
 			"name" : "its404",
 			"email" : "benwk424@gmail.com",
-			"role" : "Developer"
+			"role" : "Original developer"
+		},
+		{
+			"name": "Émile Perron",
+			"email": "contact@emileperron.com",
+			"role": "Maintainer"
 		}
 	],
 	"type" : "php-wrapper",
@@ -21,7 +27,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"Its404\\PhpPuppeteer\\" : "src"
+			"Eckinox\\PhpPuppeteer\\" : "src"
 		}
 	}
 }

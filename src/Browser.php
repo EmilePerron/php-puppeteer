@@ -1,5 +1,6 @@
 <?php
-namespace Its404\PhpPuppeteer;
+
+namespace Eckinox\PhpPuppeteer;
 
 class Browser
 {
