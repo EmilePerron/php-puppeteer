@@ -73,6 +73,40 @@ echo $content
 
 ---
 
+## Options
+
+### Content source
+There are two options to define the source of the content to render:
+
+- `html`: Provide a HTML snippet as a string.
+- `url`: Provide a URL to a publicly available webpage.
+
+### Puppeteer launch options
+The only option available for Puppeteer's launch is `cacheDir`,  which allows you to provide the path to a directory that Chromium can use to store the cache files and other user data.
+
+### Viewport options
+The `viewport` option will be passed directly to Puppeteer's `page.setViewport()`.
+
+Refer to [Puppeteer's `page.setViewport()` docs](https://pptr.dev/#?product=Puppeteer&version=v11.0.0&show=api-pagesetviewportviewport) for more information.
+
+### Goto options (page load)
+The `goto` option will be passed directly as the option parameter to Puppeteer's `page.goto()`.
+
+Refer to [Puppeteer's `page.goto()` docs](https://pptr.dev/#?product=Puppeteer&version=v11.0.0&show=api-pagegotourl-options) for more information.
+
+### PDF options (margins, size, etc.)
+The `pdf` option will be passed directly to Puppeteer's `page.pdf()` when rendering your PDF.
+
+Refer to [Puppeteer's `page.pdf()` docs](https://pptr.dev/#?product=Puppeteer&version=v11.0.0&show=api-pagepdfoptions) for more information.
+
+
+### Cookies
+The `cookies` option can be set with an array of cookie, which will be set using Puppeteer's `page.setCookie()`.
+
+Refer to [Puppeteer's `page.setCookie()` docs](https://pptr.dev/#?product=Puppeteer&version=v11.0.0&show=api-pagesetcookiecookies) for more information.
+
+---
+
 ## A few more tips...
 
 ### Starting a new page
