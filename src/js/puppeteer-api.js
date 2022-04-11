@@ -44,6 +44,7 @@ async function render() {
         '--disable-setuid-sandbox',
         '--disable-speech-api',
         '--disable-sync',
+        '--font-render-hinting=none',
         '--hide-scrollbars',
         '--ignore-gpu-blacklist',
         '--metrics-recording-only',
