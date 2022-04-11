@@ -82,7 +82,9 @@ There are two options to define the source of the content to render:
 - `url`: Provide a URL to a publicly available webpage.
 
 ### Puppeteer launch options
-The only option available for Puppeteer's launch is `cacheDir`,  which allows you to provide the path to a directory that Chromium can use to store the cache files and other user data.
+
+- `launchArgs` allows you to add an array of additionnal flags to the Chromium launch arguments.
+- `cacheDir` allows you to provide the path to a directory that Chromium can use to store the cache files and other user data.
 
 ### Viewport options
 The `viewport` option will be passed directly to Puppeteer's `page.setViewport()`.

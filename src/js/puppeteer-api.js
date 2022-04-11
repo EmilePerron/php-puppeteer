@@ -57,7 +57,7 @@ async function render() {
         '--password-store=basic',
         '--use-gl=swiftshader',
         '--use-mock-keychain',
-    ],
+    ].concat(params.launchArgs || []),
   };
 
   if (params.cacheDir) {
